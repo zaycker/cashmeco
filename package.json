@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/zaycker/cashmeco#readme",
   "devDependencies": {
+    "elm-webpack-loader": "^2.0.1",
+    "file-loader": "^0.8.5",
     "webpack": "^2.1.0-beta.4"
+  },
+  "dependencies": {
+    "leaflet": "^0.7.7"
   }
 }
