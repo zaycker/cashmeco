@@ -1,6 +1,6 @@
 #How to use:
 
-<script>
+```javascript
   (function(w, d, p) {
     var s = d.createElement('script'),
       tsId = 'cashmeco_' + +new Date();
@@ -9,4 +9,4 @@
     d.querySelector('head').appendChild(s);
     document.write('<div id="' + tsId + '"></div>');
   })(window, document, '/PATH_TO_LOADER.js');
-</script>
+```;

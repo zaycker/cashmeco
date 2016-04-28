@@ -8,25 +8,22 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
-    new webpack.ProvidePlugin({ riot: 'riot' }),
-    new ExtractTextPlugin('bundle.css')
+    new ExtractTextPlugin('bundle.css'),
+    new webpack.ProvidePlugin({
+      fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    })
   ],
   resolve: {
     modulesDirectories: ['node_modules'],
     extensions: ['.js']
   },
+  externals: {
+    leaflet: 'L'
+  },
   module: {
-    preLoaders: [
-      {
-        test: /\.tag$/,
-        exclude: /node_modules/,
-        loader: 'riotjs-loader',
-        query: { type: 'none' }
-      }
-    ],
     loaders: [
       {
-        test: /\.js$|\.tag$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel',
         query: {

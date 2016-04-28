@@ -1,8 +1,12 @@
-require('style!css!leaflet/dist/leaflet.css');
-import L from 'leaflet';
+import { h, render, Component } from 'preact';
+import { Provider } from 'react-redux';
+import store from './store';
+import App from './components/app';
 
-L.map(document.querySelector('.cashmeco'), {
-  center: [51.505, -0.09],
-  zoom: 13,
-  preferCanvas: true
-});
+render((
+	<div id="outer">
+		<Provider store={store}>
+			<App />
+		</Provider>
+	</div>
+), document.body);
