@@ -11,7 +11,8 @@ module.exports = {
     new ExtractTextPlugin('bundle.css'),
     new webpack.ProvidePlugin({
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    })
+    }),
+    'transform-decorators'
   ],
   resolve: {
     modulesDirectories: ['node_modules'],
