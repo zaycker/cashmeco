@@ -1,5 +1,4 @@
 import { h, Component } from 'preact';
-import { bind } from 'decko';
 import { connect } from 'react-redux';
 import { bindActions } from '../util';
 import reduce from '../reducers';

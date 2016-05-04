@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: './app/index.js',
+  entry: './src/entry.js',
   output: {
     path: './dist',
     filename: 'bundle.js'
@@ -11,8 +11,7 @@ module.exports = {
     new ExtractTextPlugin('bundle.css'),
     new webpack.ProvidePlugin({
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    }),
-    'transform-decorators'
+    })
   ],
   resolve: {
     modulesDirectories: ['node_modules'],
@@ -28,7 +27,8 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel',
         query: {
-          presets: ['es2015', 'stage-2'],
+          plugins: ['transform-decorators-legacy'],
+          presets: ['es2015', 'stage-0', 'react'],
         },
       },
       {
