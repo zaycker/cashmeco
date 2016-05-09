@@ -1,29 +1,38 @@
 import { combineReducers } from 'redux';
 import { SET_FILTER, REQUEST_POINTS, RECEIVE_POINTS } from './actions';
 
-function points(state = [], action) {
-  switch (action.type) {
-    case REQUEST_POINTS:
-      return [];
-    case RECEIVE_POINTS:
-      return action.points;
-    default:
-      return state;
-  }
-}
-
-function filters(state = {}, action) {
-  switch (action.type) {
+function filters(state = {}, { type, payload }) {
+  switch (type) {
     case SET_FILTER:
-      return action.filter;
+      return {
+        ...state,
+        ...payload
+      };
     default:
       return state;
   }
 }
 
-const cashmecoApp = combineReducers({
-  visibilityFilter,
+function points(state = { isFetching: false }, { type, payload }) {
+  switch (type) {
+    case REQUEST_POINTS:
+      return {
+        ...state,
+        isFetching: true
+      };
+    case RECEIVE_POINTS:
+      return {
+        ...payload,
+        isFetching: false
+      };
+    default:
+      return state;
+  }
+}
+
+const reducers = combineReducers({
+  filters,
   points
 });
 
-export default todoApp;
+export default reducers;
