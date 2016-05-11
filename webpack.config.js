@@ -16,7 +16,11 @@ module.exports = {
   ],
   resolve: {
     modulesDirectories: ['node_modules'],
-    extensions: ['.js']
+    extensions: ['.js'],
+    alias: {
+      'react': 'preact-compat',
+      'react-dom': 'preact-compat'
+    }
   },
   externals: {
     leaflet: 'L'
@@ -30,7 +34,13 @@ module.exports = {
         query: {
           plugins: [
             'transform-decorators-legacy',
+            'syntax-async-functions',
+            'transform-regenerator',
             ['transform-react-jsx', { pragma: 'h' }],
+            ['transform-runtime', {
+              'polyfill': false,
+              'regenerator': true
+            }]
           ],
           presets: ['es2015', 'stage-0'],
         },

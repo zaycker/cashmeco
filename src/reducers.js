@@ -21,6 +21,7 @@ function points(state = { isFetching: false }, { type, payload }) {
         isFetching: true
       };
     case RECEIVE_POINTS:
+      console.log(payload);
       return {
         ...payload,
         isFetching: false
