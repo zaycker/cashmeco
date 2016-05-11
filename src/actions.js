@@ -27,8 +27,6 @@ export function fetchPoints({ lat, lng, radius }) {
     dispatch(requestPoints());
 
     return fetch(`${API_URL}?point[latitude]=${lat}&point[longitude]=${lng}&radius=${radius}`)
-      .then(response =>
-        dispatch(receivePoints(response.json()))
-      );
+      .then(response => dispatch(receivePoints(response.json())));
   };
 }

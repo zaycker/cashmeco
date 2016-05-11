@@ -26,6 +26,10 @@ export default class Map extends Component {
     this.initMap();
   }
 
+  componentDidUpdate() {
+    console.log(this.props.points);
+  }
+
   initMap() {
     const mapContainer = this.props.mapContainer || '';
     const container = mapContainer ?
