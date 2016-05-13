@@ -12,6 +12,11 @@ module.exports = {
     new ExtractTextPlugin('bundle.css'),
     new webpack.ProvidePlugin({
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
     })
   ],
   resolve: {
@@ -58,7 +63,7 @@ module.exports = {
       {
         test: /\.png$|\.jpg$/,
         loader: 'file-loader'
-      },
+      }
     ],
   },
 
