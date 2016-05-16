@@ -1,23 +1,43 @@
-import { h, render } from 'preact';
-import { Provider } from 'react-redux';
+import { h, render, Component } from 'preact';
 import * as actions from './actions';
 import store from './store';
 import Map from './components/map';
 
-function handleMapChange(filters) {
-	store.dispatch(actions.setFilter(filters));
+class App extends Component {
+	unsubscribe = Function.prototype
 
-	const storeState = store.getState();
-	store.dispatch(actions.fetchPoints());
+	componentDidMount() {
+		this.unsubscribe = store.subscribe(this.setState.bind(this, { refresh: true }));
+	}
+
+	componentWillUnMount() {
+		this.unsubscribe();
+	}
+
+	handleMapChange(filters) {
+		store.dispatch(actions.setFilter(filters));
+
+		const storeState = store.getState();
+		store.dispatch(actions.fetchPoints());
+	}
+
+	render() {
+		const styles = {
+			width: '100%',
+			height: '100%',
+			padding: '0',
+			margin: '0'
+		};
+
+		return (
+			<div style={styles}>
+				<Map
+					handleChange={this.handleMapChange}
+					data={store.getState()}
+				/>
+			</div>
+		);
+	}
 }
 
-const styles = { width: '100%', height: '100%', padding: '0', margin: '0' };
-
-render((<div style={styles}>
-		<Provider store={store}>
-			<Map
-				handleChange={handleMapChange}
-				points={store.getState().points}
-			/>
-		</Provider>
-	</div>), document.body);
+render((<App />), document.body);

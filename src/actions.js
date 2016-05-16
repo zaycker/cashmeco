@@ -12,12 +12,12 @@ export const SET_FILTER = 'SET_FILTER';
 export const setFilter = createAction(SET_FILTER);
 
 export function fetchPoints() {
-  return async (dispatch, getState) => {
+  return (dispatch, getState) => {
     dispatch(requestPoints());
 
     const { lat, lng, radius } = getState().filters;
     const url = `${API_URL}?point[latitude]=${lat}&point[longitude]=${lng}&radius=${radius}`;
-    return await fetch(url).then(response =>
+    return fetch(url).then(response =>
       dispatch(receivePoints(response.json())));
   };
 }

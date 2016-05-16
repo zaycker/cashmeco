@@ -1,34 +1,17 @@
-import { h, Component } from 'preact';
+import { h, Component, render } from 'preact';
 import L from 'leaflet';
 import getMapBoxLayer from './layers/mapbox';
+import getMarker from './marker';
 
 export default class Map extends Component {
-  constructor(props) {
-    super(props);
+  map = null;
+  markers = [];
 
-    this.map = null;
-  }
+  componentDidMount = () => this.initMap();
 
-  render() {
-    const styles = {
-      width: '100%',
-      height: '100%',
-      padding: '0',
-      margin: '0'
-    };
+  componentWillReceiveProps = (props) => this.drawMarkers(props.data);
 
-    return (
-      this.props.mapContainer ? null : <div style={styles} />
-    );
-  }
-
-  componentDidMount() {
-    this.initMap();
-  }
-
-  componentDidUpdate() {
-    console.log(this.props.points);
-  }
+  shouldComponentUpdate = () => false;
 
   initMap() {
     const mapContainer = this.props.mapContainer || '';
@@ -64,6 +47,18 @@ export default class Map extends Component {
       L.Util.throttle(this.handleMapChange, 500, this));
   }
 
+  drawMarkers(data) {
+    const { currency, operation } = data.filters;
+
+    this.markers.forEach(marker => marker.remove());
+    this.markers = data.points.filter(point =>
+        point.rates[currency] && point.rates[currency][operation])
+      .map(point => getMarker({
+        point,
+        data
+      }).addTo(this.map));
+  }
+
   handleMapChange() {
     const handleChange = this.props.handleChange;
 
@@ -79,5 +74,18 @@ export default class Map extends Component {
       'lng': center.lng,
       radius
     });
+  }
+
+  render() {
+    const styles = {
+      width: '100%',
+      height: '100%',
+      padding: '0',
+      margin: '0'
+    };
+
+    return (
+      this.props.mapContainer ? null : <div style={styles} />
+    );
   }
 };

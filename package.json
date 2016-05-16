@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "NODE_ENV=production webpack",
     "dev": "webpack-dev-server"
   },
   "repository": {
@@ -44,6 +44,7 @@
   "dependencies": {
     "preact": "^4.8.0",
     "preact-compat": "^1.7.1",
+    "preact-svg": "^1.5.1",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-actions": "^0.9.1",

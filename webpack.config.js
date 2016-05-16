@@ -1,8 +1,8 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const NODE_ENV = process.env.NODE_ENV;
 
 module.exports = {
-  // entry: ['babel-polyfill', './src/entry.js'],
   entry: './src/entry.js',
   output: {
     path: './dist',
@@ -12,13 +12,12 @@ module.exports = {
     new ExtractTextPlugin('bundle.css'),
     new webpack.ProvidePlugin({
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
     })
-  ],
+  ].concat(NODE_ENV === 'production' ? new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false
+    }
+  }) : []),
   resolve: {
     modulesDirectories: ['node_modules'],
     extensions: ['.js'],
