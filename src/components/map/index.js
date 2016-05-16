@@ -49,14 +49,37 @@ export default class Map extends Component {
 
   drawMarkers(data) {
     const { currency, operation } = data.filters;
+    let range = {
+      min: Number.MAX_VALUE,
+      max: Number.MIN_VALUE
+    };
 
     this.markers.forEach(marker => marker.remove());
-    this.markers = data.points.filter(point =>
-        point.rates[currency] && point.rates[currency][operation])
-      .map(point => getMarker({
-        point,
-        data
-      }).addTo(this.map));
+
+    const filteredPoints = data.points.filter(point => {
+      const value = point.rates[currency] && point.rates[currency][operation];
+
+      if (!value) {
+        return false;
+      }
+
+      range = {
+        min: Math.min(range.min, value),
+        max: Math.max(range.max, value)
+      };
+
+      return !!value;
+    });
+
+    const step = (range.max - range.min) / (filteredPoints || 1);
+
+    this.markers = filteredPoints.map(point => getMarker({
+      point,
+      data,
+      range,
+      step,
+      pointsAmount: filteredPoints.length
+    }).addTo(this.map));
   }
 
   handleMapChange() {
