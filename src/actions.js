@@ -14,8 +14,20 @@ export const setFilter = createAction(SET_FILTER);
 export const fetchPoints = () => async (dispatch, getState) => {
     dispatch(requestPoints());
 
-    const { lat, lng, radius } = getState().filters;
+    const {
+      filters: {
+        lat, lng, radius
+      },
+      lastFetchTS
+    } = getState();
+
     const url = `${API_URL}?point[latitude]=${lat}&point[longitude]=${lng}&radius=${radius}`;
     const response = await fetch(url);
-    dispatch(receivePoints(await response.json()));
+    const json = await response.json();
+
+    if (lastFetchTS !== getState().lastFetchTS) {
+      return;
+    }
+
+    dispatch(receivePoints(json));
   };

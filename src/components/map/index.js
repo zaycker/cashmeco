@@ -71,14 +71,15 @@ export default class Map extends Component {
       return !!value;
     });
 
-    const step = (range.max - range.min) / (filteredPoints || 1);
+    const step = (range.max - range.min) / 100;
 
     this.markers = filteredPoints.map(point => getMarker({
       point,
       data,
-      range,
-      step,
-      pointsAmount: filteredPoints.length
+      range: {
+        ...range,
+        step
+      }
     }).addTo(this.map));
   }
 

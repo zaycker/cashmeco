@@ -43,10 +43,12 @@ function currencies(state = defaultCurrencies, { type, payload }) {
   }
 }
 
-function lastFetchTS(state = +new Date(), { type, payload }) {
+function lastFetchTS(state = null, { type, payload }) {
   switch (type) {
     case REQUEST_POINTS:
       return +new Date();
+    case RECEIVE_POINTS:
+      return null;
     default:
       return state;
   }

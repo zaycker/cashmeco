@@ -43,7 +43,7 @@
       <feBlend result="blend-2" mode="multiply" in2="blend"/>
     </filter>
   </defs>
-  <g transform="translate(-133 -702)" style="fill: #ff0000; filter: url(#filter)">
+  <g transform="translate(-133 -702)" style="filter: url(#filter)">
     <path id="marker" class="marker" d="M164.006,703a29.974,29.974,0,0,1,30.006,29.942c0,16.536-31.206,73.058-31.206,73.058S134,749.478,134,732.942A29.974,29.974,0,0,1,164.006,703Z" style="stroke: inherit; filter: none; fill: inherit"/>
   </g>
   <use transform="translate(-133 -702)" xlink:href="#marker" style="stroke: url(#linear-gradient); filter: none; fill: none"/>
