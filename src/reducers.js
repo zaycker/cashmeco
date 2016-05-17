@@ -43,19 +43,17 @@ function currencies(state = defaultCurrencies, { type, payload }) {
   }
 }
 
-function isFetching(state = false, { type, payload }) {
+function lastFetchTS(state = +new Date(), { type, payload }) {
   switch (type) {
     case REQUEST_POINTS:
-      return true;
-    case RECEIVE_POINTS:
-      return false;
+      return +new Date();
     default:
       return state;
   }
 }
 
 const reducers = combineReducers({
-  isFetching,
+  lastFetchTS,
   filters,
   points
 });
