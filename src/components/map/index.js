@@ -58,8 +58,9 @@ export default class Map extends Component {
 
     const filteredPoints = data.points.filter(point => {
       const value = point.rates[currency] && point.rates[currency][operation];
+      const latLngLocation = L.latLng(point.location.latitude, point.location.longitude);
 
-      if (!value) {
+      if (!value || !this.map.getBounds().contains(latLngLocation)) {
         return false;
       }
 
