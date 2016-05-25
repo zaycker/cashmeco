@@ -3,6 +3,22 @@ import L from 'leaflet';
 import getMapBoxLayer from './layers/mapbox';
 import getMarker from './marker';
 
+const getPopupLayout = (point) => {
+  const currencies = Object.keys(point.rates).map((rate) => {
+    return rate + ':' + ' покупка ' + point.rates[rate].buy + ' руб, продажа ' + point.rates[rate].sell + ' руб';
+  }).join('<br />');
+
+  return `
+    <div>
+      <h4>${point.bank + (point.point ? ' - ' + point.point : '')}</h4>
+      <p>${point.address}</p>
+      <p>Режим работы: <br />
+        <pre>${point.timetable}</pre>
+      </p>
+      <p>${currencies}</p>
+    </div>`;
+}
+
 export default class Map extends Component {
   map = null;
   markers = [];
@@ -81,6 +97,8 @@ export default class Map extends Component {
         ...range,
         step
       }
+    }).bindPopup(getPopupLayout(point), {
+      autoPan: false
     }).addTo(this.map));
   }
 
