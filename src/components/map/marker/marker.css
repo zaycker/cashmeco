@@ -43,14 +43,21 @@
   height: 100%;
 }
 
+.marker__shadow-inner {
+  fill-rule: evenodd;
+  opacity: 0.3;
+}
+
 .marker-container.leaflet-marker-icon svg {
   z-index: auto;
 }
 
 .marker__caption {
+  position: relative;
+  top: 20%;
   color: #fff;
   font-size: 14px;
-  line-height: 2em;
+  line-height: 1em;
   font-family: 'Open Sans Condensed', sans-serif;
   font-weight: bold;
   text-align: center;
