@@ -57,7 +57,7 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
+        loader: 'style-loader!css-loader',
       },
       {
         test: /\.png$|\.jpg$/,

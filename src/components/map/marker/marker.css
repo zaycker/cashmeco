@@ -1,0 +1,58 @@
+.marker__inner {
+  fill-opacity: 1;
+  filter: url('#blend-it');
+  fill: currentColor;
+  fill-rule: evenodd;
+}
+
+.marker__border {
+  fill-opacity: 0;
+  stroke-linejoin: round;
+  stroke-width: 2px;
+  stroke: url('#marker-stroke-gradient');
+}
+
+.marker {
+  transition: color 0.2s;
+}
+
+.marker_type-0 {
+  color: rgb(121,191,86);
+}
+
+.marker_type-1 {
+  color: rgb(175,172,43);
+}
+
+.marker_type-2 {
+  color: rgb(229,153,0);
+}
+
+.marker_type-3 {
+  color: rgb(237,134,38);
+}
+
+.marker_type-4 {
+  color: rgb(245,115,75);
+}
+
+.output {
+  height: 200px;
+}
+.output svg {
+  height: 100%;
+}
+
+.marker-container.leaflet-marker-icon svg {
+  z-index: auto;
+}
+
+.marker__caption {
+  color: #fff;
+  font-size: 14px;
+  line-height: 2em;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: bold;
+  text-align: center;
+  transform: matrix( 1.16335433834222,0,0,1.16279069767442,0,0);
+}

@@ -88,14 +88,11 @@ export default class Map extends Component {
       return !!value;
     });
 
-    const step = (range.max - range.min) / 100;
-
     this.markers = filteredPoints.map(point => getMarker({
       point,
       data,
       range: {
-        ...range,
-        step
+        ...range
       }
     }).bindPopup(getPopupLayout(point), {
       autoPan: false

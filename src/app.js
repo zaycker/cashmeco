@@ -2,6 +2,7 @@ import { h, render, Component } from 'preact';
 import * as actions from './actions';
 import store from './store';
 import Map from './components/map';
+require('./css/style.css');
 
 class App extends Component {
 	unsubscribe = Function.prototype
