@@ -9,4 +9,3 @@
     d.querySelector('head').appendChild(s);
     document.write('<div id="' + tsId + '"></div>');
   })(window, document, '/PATH_TO_LOADER.js');
-```;
